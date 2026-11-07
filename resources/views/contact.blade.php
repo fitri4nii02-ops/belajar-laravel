@@ -1,6 +1,6 @@
 @extends('layouts.app')             
 
-@section('title', 'Halaman contact')
+@section('title', 'Halaman Contact')
 
 @section('content')                 
     <section class="bg-white dark:bg-gray-900">

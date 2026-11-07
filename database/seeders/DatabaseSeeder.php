@@ -2,22 +2,29 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Mahasiswa;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class MahasiswaSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $kelas = 'Tekom D 25';
+        $prodi = 'Teknik Komputer';
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Ganti NIM dengan NIM asli
+        $daftar = [
+            ['nim' => '25001', 'nama' => 'Fitriani'],
+            ['nim' => '25002', 'nama' => 'Berlian'],
+            ['nim' => '25003', 'nama' => 'Itta'],
+            ['nim' => '25004', 'nama' => 'Maii'],
+        ];
+
+        foreach ($daftar as $mhs) {
+            Mahasiswa::updateOrCreate(
+                ['nim' => $mhs['nim']],
+                ['nama' => $mhs['nama'], 'kelas' => $kelas, 'prodi' => $prodi]
+            );
+        }
     }
 }

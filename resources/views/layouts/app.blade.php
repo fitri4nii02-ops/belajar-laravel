@@ -32,7 +32,7 @@
 
     @include('partials.header')
 
-    <main class="flex-1">
+    <main class="relative z-[60] flex-1">
         @yield('content')
     </main>
 
