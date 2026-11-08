@@ -4,11 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class MahasiswaController extends Controller
 {
     public function index()
     {
+        // Data awal hanya diisi satu kali
+        if (Cache::add('data_awal_mahasiswa', true)) {
+            $kelas = 'Tekom D 25';
+            $prodi = 'Teknik Komputer';
+
+            $daftar = ['Fitriani', 'Berlian', 'Itta', 'Maii'];
+
+            foreach ($daftar as $nama) {
+                Mahasiswa::firstOrCreate(
+                    ['nama' => $nama],
+                    ['kelas' => $kelas, 'prodi' => $prodi]
+                );
+            }
+        }
+
         $mahasiswas = Mahasiswa::orderBy('id', 'asc')->paginate(10);
 
         return view('mahasiswa.index', compact('mahasiswas'));
